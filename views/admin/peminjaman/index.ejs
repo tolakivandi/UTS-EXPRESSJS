@@ -1,0 +1,97 @@
+<%- include('../../partials/header.ejs')  %>
+<%- include('../../partials/sidebar.ejs')  %>
+  <!-- Theme Customizer Panel -->
+ 
+
+  
+
+  <!-- Main Wrapper-->
+  <main class="main-wrapper">
+      <div class="container-fluid">
+          <div class="inner-contents">
+             
+
+              <!-- Table 1 -->
+              <div class="card border-0 overflow-auto">
+                  <div class="card-header p-5 pb-0 bg-transparent border-0 d-flex align-items-center justify-content-between gap-3 flex-wrap">
+                      <h4 class="mb-0">Tabel Peminjaman</h4>
+                      <div class="ms-auto d-flex align-items-center gap-3">
+                          <a href="peminjaman/create" class="btn btn-primary">Tambah Data</a>
+                      </div>
+                  </div>
+
+                  <div class="card-body">
+                    <div class="table table-flex text-dark">
+                        <div class="thead fw-bold border-bottom border-1 border-light-200">
+                            <div class="row px-2">
+                                <div class="col col-1 text-center">No</div>
+                                
+                                <div class="col col-4">Nama Pengguna <span class="float-end"><i class="bi bi-caret-up-fill text-gray-300"></i></span></div>  
+                                <div class="col col-2">Nama Lab <span class="float-end"><i class="bi bi-caret-up-fill text-gray-300"></i></span></div>
+                                <div class="col col-2">Tanggal Peminjaman <span class="float-end"><i class="bi bi-caret-up-fill text-gray-300"></i></span></div>
+                                <div class="col col-2">Waktu Mulai <span class="float-end"><i class="bi bi-caret-up-fill text-gray-300"></i></span></div>
+                                <div class="col col-2">Waktu Selesai <span class="float-end"><i class="bi bi-caret-up-fill text-gray-300"></i></span></div>
+                                <div class="col col-2">Disetujui <span class="float-end"><i class="bi bi-caret-up-fill text-gray-300"></i></span></div>
+                                <div class="col col-1 text-end">Action</div>
+                            </div>
+                        </div>
+
+                        <div class="tbody">
+                          <% for(var i=0; i < data.length; i++) { %>
+                            <div class="row px-2 border-bottom border-1 border-light-200">
+                              <div class="col col-1 text-center">1</div>
+                            
+                                <div class="col col-4"><%= data[i].nama_pengguna %></div>
+                                <div class="col col-2"><%= data[i].nama_lab %></div>
+                                <div class="col col-2"><%= data[i].tanggal_peminjaman %></div>
+                                <div class="col col-2"><%= data[i].waktu_mulai %></div>
+                                <div class="col col-2"><%= data[i].waktu_selesai %></div>
+                                <div class="col col-2"><%= data[i].disetujui %></div>
+                                <div class="col col-1">
+                                    <div class="dropdown text-end">
+                                        <a href="#" data-bs-toggle="dropdown" class="fs-24 text-gray">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </a>
+                                        <div class="dropdown-menu p-0">
+                                            <a class="dropdown-item" href="#">Edit</a>
+                                            <a class="dropdown-item text-danger" href="#">Delete</a>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                            <% } %>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 d-flex justify-content-center justify-content-md-between align-items-center flex-wrap">
+                        <p class="mb-0">Showing <span class="fw-bold">1-10</span> from <span class="fw-bold">46</span> data</p>
+
+                        <nav>
+                            <ul class="pagination mb-0">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">«</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">»</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>                    
+                    </div>
+                </div>
+              </div>
+
+           
+          </div>
+      </div>
+  </main>
+<%- include('../../partials/footer.ejs')  %>
+
+
+

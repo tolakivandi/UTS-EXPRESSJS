@@ -29,7 +29,6 @@ router.get("/create", async function (req, res, next) {
     data: rows,
   });
 });
-
 router.post("/store", upload.single("gambar"), async function (req, res, next) {
   try {
     let { nama_lab, lokasi, tersedia } = req.body;
@@ -37,18 +36,19 @@ router.post("/store", upload.single("gambar"), async function (req, res, next) {
       nama_lab,
       lokasi,
       tersedia,
-      gambar: req.file.filename,
+      gambar: req.file ? req.file.filename : null, // Pastikan untuk menangani jika tidak ada file yang diunggah
     };
 
     await Model_lab.Store(Data);
-    req.flash("succes", "Berhasil menyimpan data");
+    req.flash("success", "Berhasil menyimpan data"); // Perbaiki kunci flash message menjadi "success"
     res.redirect("/lab");
   } catch (error) {
-    req.flash("error", "gagal menyimpan data");
+    console.error(error); // Cetak error untuk debugging
+    req.flash("error", "Gagal menyimpan data: " + error.message); // Sertakan pesan error dalam flash message
     res.redirect("/lab");
-    console.error(error);
   }
 });
+
 router.get("/edit/:id", async function (req, res, next) {
   try {
     let id = req.params.id;

@@ -1,15 +1,15 @@
-let mysql = require('mysql');
+let mysql = require("mysql");
 let connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'pinjam_lab',
+  host: "localhost",
+  user: "root",
+  password: "root",
+  database: "pinjam_lab",
 });
 connection.connect(function (error) {
   if (!!error) {
     console.log(error);
   } else {
-    console.log('Berhasil terhubung ke database');
+    console.log("Berhasil terhubung ke database");
   }
 });
 

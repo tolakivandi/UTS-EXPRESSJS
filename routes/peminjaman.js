@@ -18,12 +18,21 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
+function convert(str) {
+  var date = new Date(str),
+    mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+    day = ("0" + date.getDate()).slice(-2);
+  return [date.getFullYear(), mnth, day].join("-");
+}
+
 router.get("/", async function (req, res, next) {
   let rows = await model_peminjaman.getAll();
   res.render("admin/peminjaman/index", {
     data: rows,
+    convert
   });
 });
+
 
 router.get("/create", async function (req, res, next) {
   let rows = await model_peminjaman.getAll();
@@ -82,6 +91,9 @@ router.get("/edit/:id", async function (req, res, next) {
       alasan: rows[0].alasan,
       data_pengguna: data_pengguna,
       data_lab: data_lab,
+      nama_pengguna : rows[0].nama_pengguna,
+      nama_lab : rows[0].nama_lab,
+      convert,
     });
   } catch (error) {
     res.redirect("/peminjaman");
@@ -109,6 +121,22 @@ router.post("/update/:id", async function (req, res, next) {
       waktu_selesai,
       disetujui,
       alasan,
+    };
+    await model_peminjaman.Update(id, Data);
+    req.flash("success", "Berhasil mengupdate data");
+    res.redirect("/peminjaman");
+  } catch (error) {
+    console.error(error);
+    req.flash("error", "Gagal mengupdate data");
+    res.redirect("/peminjaman");
+  }
+});
+
+router.post("/disetujui/:id", async function (req, res, next) {
+  try {
+    let id = req.params.id;
+    let Data = {
+      disetujui : 'ya'
     };
     await model_peminjaman.Update(id, Data);
     req.flash("success", "Berhasil mengupdate data");

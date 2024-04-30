@@ -44,7 +44,7 @@ class Model_peminjaman {
   static async getById(id) {
     return new Promise((resolve, reject) => {
       connection.query(
-        "SELECT * FROM peminjaman WHERE id_peminjaman = ?",
+        "SELECT * FROM peminjaman JOIN pengguna ON peminjaman.id_pengguna = pengguna.id_pengguna JOIN lab ON peminjaman.id_lab = lab.id_lab WHERE id_peminjaman = ?",
         id,
         (err, rows) => {
           if (err) {

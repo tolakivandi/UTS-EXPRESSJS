@@ -76,31 +76,41 @@ include('../../partials/sidebar.ejs') %>
 
                 <div class="col col-2"><%= data[i].nama_pengguna %></div>
                 <div class="col col-2"><%= data[i].nama_lab %></div>
-                <div class="col col-2"><%= data[i].tanggal_peminjaman %></div>
+                <div class="col col-2"><%= convert(data[i].tanggal_peminjaman) %></div>
                 <div class="col col-2"><%= data[i].waktu_mulai %></div>
                 <div class="col col-2"><%= data[i].waktu_selesai %></div>
 
                 <div class="col col-2">
-                  <% if (data[i].disetujui == 1) { %>
+                  <% if (data[i].disetujui == 'ya') { %>
                   <div class="btn btn-success text-white">Disetujui</div>
-                  <% } else if (data[i].disetujui == 0) { %>
+                  <% } else if (data[i].disetujui == 'tidak') { %>
                   <div class="btn btn-danger text-white">Tidak Disetujui</div>
                   <% } %>
                 </div>
                 <div class="col col-2"><%= data[i].alasan %></div>
-
+                
                 <div class="col col-2 d-flex text-center">
+                  <form action="/peminjaman/disetujui/<%= data[i].id_peminjaman %>" method="post">
+                    <button type="submit" class="btn btn-info text-white">
+                      Setuju
+                    </button>
+                  </form>
+                  |
                   <a
-                    class="btn btn-warning"
                     href="/peminjaman/edit/<%= data[i].id_peminjaman %>"
-                    >Edit</a
+                    >
+                    <button class="btn btn-warning">
+                      Edit
+                    </button>
+                    </a
                   >
                   |
                   <a
                     href="/peminjaman/delete/<%= data[i].id_peminjaman %>"
-                    class="btn btn-danger"
                   >
-                    Delete
+                    <button class="btn btn-danger">
+                      Delete
+                    </button>
                   </a>
                 </div>
               </div>

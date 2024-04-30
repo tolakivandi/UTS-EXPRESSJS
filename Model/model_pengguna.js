@@ -18,7 +18,7 @@ class Model_pengguna {
 
   static async Store(data) {
     return new Promise((resolve, reject) => {
-      connection.query("INSERT INTO Pengguna SET ?", data, (err, result) => {
+      connection.query("INSERT INTO pengguna SET ?", data, (err, result) => {
         if (err) {
           reject(err);
         } else {
@@ -28,10 +28,26 @@ class Model_pengguna {
     });
   }
 
+  static async login(email) {
+    return new Promise((resolve, reject) => {
+      connection.query(
+        "SELECT * FROM pengguna WHERE email = ?",
+        email,
+        (err, rows) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(rows);
+          }
+        }
+      );
+    });
+  }
+
   static async getId(id) {
     return new Promise((resolve, reject) => {
       connection.query(
-        "SELECT * FROM Pengguna WHERE id_pengguna = ?",
+        "SELECT * FROM pengguna WHERE id_pengguna = ?",
         id,
         (err, rows) => {
           if (err) {
@@ -47,7 +63,7 @@ class Model_pengguna {
   static async Update(id, data) {
     return new Promise((resolve, reject) => {
       connection.query(
-        "UPDATE Pengguna SET ? WHERE id_pengguna = ?",
+        "UPDATE pengguna SET ? WHERE id_pengguna = ?",
         [data, id],
         (err, result) => {
           if (err) {
@@ -63,7 +79,7 @@ class Model_pengguna {
   static async Delete(id) {
     return new Promise((resolve, reject) => {
       connection.query(
-        "DELETE FROM Pengguna WHERE id_pengguna = ?",
+        "DELETE FROM pengguna WHERE id_pengguna = ?",
         id,
         (err, result) => {
           if (err) {

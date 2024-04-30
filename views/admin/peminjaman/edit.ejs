@@ -50,7 +50,9 @@
                       name="id_pengguna"
                       required
                     >
-                      <option disabled value="">Choose...</option>
+                      <option selected value="<%= id_pengguna %>">
+                        <%= nama_pengguna %>
+                      </option>
                       <% for(var i=0; i < data_pengguna.length; i++){ %>
                       <option value="<%= data_pengguna[i].id_pengguna %>">
                         <%= data_pengguna[i].nama_pengguna %>
@@ -59,7 +61,8 @@
                     </select>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <input type="hidden" name="disetujui" value="<%= disetujui %>">
+                <div class="col-lg-6">
                   <div class="form-group">
                     <label for="id_lab" class="form-label">Nama Lab</label>
                     <select
@@ -68,34 +71,15 @@
                       name="id_lab"
                       required
                     >
-                      <option disabled value="">Choose...</option>
+                    <option selected value="<%= id_lab %>">
+                      <%= nama_lab %>
+                    </option>
                       <% for(var i=0; i < data_lab.length; i++){ %>
                       <option value="<%= data_lab[i].id_lab %>">
                         <%= data_lab[i].nama_lab %>
                       </option>
                       <% } %>
                     </select>
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <div class="input-group">
-                      <span
-                        class="badge d-flex align-items-center text-dark rounded-0 rounded-start py-2 px-3 border border-light-200 fs-16"
-                      >
-                        <i class="bi bi-person"></i
-                      ></span>
-
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="lokasi"
-                        id="lokasi"
-                        value="<%= data_lab.lokasi %>"
-                        placeholder="Lokasi"
-                        required
-                      />
-                    </div>
                   </div>
                 </div>
                 <div class="col-lg-6">
@@ -110,7 +94,7 @@
                         class="form-control"
                         name="tanggal_peminjaman"
                         id="tanggal_peminjaman"
-                        value="<%= tanggal_peminjaman.tanggal_peminjaman %>"
+                        value="<%= convert(tanggal_peminjaman) %>"
                         placeholder="tanggal_peminjaman"
                         required
                       />
@@ -129,9 +113,11 @@
                         class="form-control"
                         name="waktu_mulai"
                         id="waktu_mulai"
+                        value="<%= waktu_mulai %>"
                         placeholder="waktu mulai"
                         required
                       />
+
                     </div>
                   </div>
                 </div>
@@ -147,25 +133,11 @@
                         class="form-control"
                         name="waktu_selesai"
                         id="waktu_selesai"
+                        value="<%= waktu_selesai %>"
                         placeholder="waktu selesai"
                         required
                       />
                     </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="disetujui" class="form-label">Disetujui</label>
-                    <select
-                      class="form-control"
-                      id="disetujui"
-                      name="disetujui"
-                      required
-                    >
-                      <option disabled value="">Choose...</option>
-                      <option value="0">Tidak Disetujui</option>
-                      <option value="1">Disetujui</option>
-                    </select>
                   </div>
                 </div>
                 <div class="col-lg-6">
@@ -180,6 +152,7 @@
                         class="form-control"
                         name="alasan"
                         id="alasan"
+                        value="<%= alasan %>"
                         placeholder="Alasan"
                         required
                       />

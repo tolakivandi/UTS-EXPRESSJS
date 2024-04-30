@@ -54,12 +54,7 @@ router.get("/edit/:id", async function (req, res, next) {
     let id = req.params.id;
     let rows = await Model_lab.getById(id);
     res.render("admin/lab/edit", {
-      data: rows,
-      id: rows[0].id_lab, // Ubah id_movie menjadi id_lab
-      nama_lab: rows[0].nama_lab,
-      lokasi: rows[0].lokasi,
-      tersedia: rows[0].tersedia,
-      gambar: rows[0].gambar,
+      data: rows[0], // Mengambil objek pertama dari array rows
     });
   } catch (error) {
     res.redirect("/lab");
@@ -67,8 +62,9 @@ router.get("/edit/:id", async function (req, res, next) {
   }
 });
 
+
 router.post(
-  "/update/:id", // Perbaiki path update
+  "/update/:id", 
   upload.single("gambar"),
   async function (req, res, next) {
     try {
@@ -95,7 +91,7 @@ router.post(
         gambar,
       };
 
-      await Model_lab.Update(id, Data); // Tambahkan await untuk memastikan pembaruan selesai sebelum redirect
+      await Model_lab.Update(id, Data); 
       req.flash("success", "Berhasil update data");
       res.redirect("/lab");
     } catch (error) {

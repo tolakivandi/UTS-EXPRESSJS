@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -120,7 +119,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="m-auto mw-510 py-5">
         <form action="/saveusers" method="POST">
@@ -136,21 +134,25 @@
             <div class="card bg-white border-0 rounded-10 mb-4">
                 <div class="card-body p-4">
                     <div class="form-group mb-4">
-                        <label class="label">Email</label>
-                        <input autocomplete="off" type="email" name="email" class="form-control h-58"
-                            placeholder="envytheme@info.com">
+                        <label class="label" for="nama_pengguna">Nama Pengguna</label>
+                        <input autocomplete="off" type="text" name="nama_pengguna" id="nama_pengguna" class="form-control h-58"
+                            placeholder="Nama Pengguna" required>
                     </div>
-                    <div class="form-group mb-0">
-                        <label class="label">Password</label>
-                        <div class="form-group">
-                            <div class="password-wrapper position-relative">
-                                <input type="password" name="password" id="password"
-                                    class="form-control h-58 text-dark">
-                                <i style="color: #A9A9C8; font-size: 16px; right: 15px !important;"
-                                    class="ri-eye-off-line password-toggle-icon translate-middle-y top-50 end-0 position-absolute"
-                                    aria-hidden="true"></i>
-                            </div>
-                        </div>
+                    <div class="form-group mb-4">
+                        <label class="label" for="email">Email</label>
+                        <input autocomplete="off" type="email" name="email" id="email" class="form-control h-58"
+                            placeholder="Email" required>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="label" for="kata_sandi">Kata Sandi</label>
+                        <input type="password" name="kata_sandi" id="kata_sandi" class="form-control h-58 text-dark" required>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="label" for="role">Role</label>
+                        <select name="role" id="role" class="form-control h-58">
+                            <option value="admin">Admin</option>
+                            <option value="mahasiswa">Mahasiswa</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -159,5 +161,4 @@
         </form>
     </div>
 </body>
-
 </html>

@@ -3,9 +3,13 @@ var router = express.Router();
 const fs = require("fs");
 const path = require("path");
 const multer = require("multer");
+
 const model_peminjaman = require("../Model/model_peminjaman.js");
+
 const Model_pengguna = require("../Model/model_pengguna.js");
+
 const Model_lab = require("../Model/model_lab.js");
+
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {

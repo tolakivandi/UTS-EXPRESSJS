@@ -16,7 +16,11 @@ router.post('/login', async function (req, res) {
     if (user && user.kata_sandi === password) {
       // Simpan ID pengguna dalam sesi
       req.session.userId = user.id_pengguna;
-      res.redirect('/users');
+      if (user[0].role == 'admin') {
+        res.redirect('/users');
+      } else {
+        res.redirect('/mahasiswa');
+      }
     } else {
       res.status(401).json({ error: 'Email atau kata sandi salah' });
     }

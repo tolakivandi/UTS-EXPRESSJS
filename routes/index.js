@@ -2,10 +2,16 @@ var express = require('express');
 const Model_pengguna = require('../Model/model_pengguna');
 var router = express.Router();
 var bcrypt = require("bcrypt")
+const Model_user = require("../Model/model_pengguna.js");
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('admin/dashboard', { title: 'Express' });
+router.get('/', async function(req, res, next) {
+  let user = await Model_user.getId(req.session.userId)
+  res.render('admin/dashboard', { 
+    title: 'Express',
+    nama: user[0].nama_pengguna,
+    role: user[0].role
+  });
 });
 
 router.get('/register', function(req, res, next){
@@ -43,7 +49,7 @@ router.post('/log', async (req, res) =>{
         res.redirect('/');
         }else if(Data[0].role == "mahasiswa"){
           req.flash('success', 'berhasil login');
-          res.redirect('/superusers');
+          res.redirect('/mahasiswa');
         } else{
           res.redirect('/login');
         }
@@ -56,7 +62,6 @@ router.post('/log', async (req, res) =>{
       // res.send("gagal");
       req.flash('success','akun tidak ditemukan');
       res.redirect('/login');
-      console.log("P");
     }
   }catch (err){
     // res.send(err);

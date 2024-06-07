@@ -14,6 +14,8 @@ const { strict } = require("assert");
 const dashboardRouter = require("./routes/dashboard");
 const indexRouter = require("./routes/index");
 const SuperRouter = require("./routes/superusers");
+const MahasiswaRouter = require("./routes/mahasiswa");
+const MahasiswaLabRouter = require("./routes/peminjamanMahasiswa");
 
 var app = express();
 
@@ -37,7 +39,7 @@ app.use(
     },
     store: new MemoryStore(),
     saveUninitialized: true,
-    resave: false,
+    resave: true,
     secret: "secret",
   })
 );
@@ -50,6 +52,8 @@ app.use("/pengguna", penggunaRouter);
 app.use("/peminjaman", peminjammanRoter);
 app.use("/dashboard", dashboardRouter);
 app.use("/superusers",SuperRouter);
+app.use("/mahasiswa", MahasiswaRouter);
+app.use("/mahasiswa/lab", MahasiswaLabRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

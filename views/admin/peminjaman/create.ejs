@@ -39,26 +39,7 @@
             <!-- First Wizard -->
             <div class="form-wizard-block active">
               <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="id_pengguna" class="form-label"
-                      >Nama Pengguna</label
-                    >
-                    <select
-                      class="form-control"
-                      id="id_pengguna"
-                      name="id_pengguna"
-                      required
-                    >
-                      <option disabled value="">Choose...</option>
-                      <% for(var i=0; i < data_pengguna.length; i++){ %>
-                      <option value="<%= data_pengguna[i].id_pengguna %>">
-                        <%= data_pengguna[i].nama_pengguna %>
-                      </option>
-                      <% } %>
-                    </select>
-                  </div>
-                </div>
+                
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="id_lab" class="form-label">Nama Lab</label>
@@ -126,7 +107,7 @@
                         name="waktu_mulai"
                         id="waktu_mulai"
                         placeholder="waktu mulai"
-                        required
+                        
                       />
                     </div>
                   </div>
@@ -144,24 +125,9 @@
                         name="waktu_selesai"
                         id="waktu_selesai"
                         placeholder="waktu selesai"
-                        required
+                        
                       />
                     </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="disetujui" class="form-label">Disetujui</label>
-                    <select
-                      class="form-control"
-                      id="disetujui"
-                      name="disetujui"
-                      required
-                    >
-                      <option selected disabled value="">Choose...</option>
-                      <option value="0">Tidak Disetujui</option>
-                      <option value="1">Disetujui</option>
-                    </select>
                   </div>
                 </div>
                 <div class="col-lg-6">

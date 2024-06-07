@@ -1,6 +1,5 @@
-<%- include('../../partials/header.ejs') %> <%-
-include('../../partials/sidebar.ejs') %>
-<!-- Theme Customizer Panel -->
+<%- include('../../partials/header.ejs') %> 
+<%- include('../../partials/sidebar.ejs') %>
 
 <!-- Main Wrapper-->
 <main class="main-wrapper">
@@ -8,9 +7,7 @@ include('../../partials/sidebar.ejs') %>
     <div class="inner-contents">
       <!-- Table 1 -->
       <div class="card border-0 overflow-auto">
-        <div
-          class="card-header p-5 pb-0 bg-transparent border-0 d-flex align-items-center justify-content-between gap-3 flex-wrap"
-        >
+        <div class="card-header p-5 pb-0 bg-transparent border-0 d-flex align-items-center justify-content-between gap-3 flex-wrap">
           <h4 class="mb-0">Tabel Peminjaman</h4>
           <div class="ms-auto d-flex align-items-center gap-3">
             <a href="peminjaman/create" class="btn btn-primary">Tambah Data</a>
@@ -22,49 +19,13 @@ include('../../partials/sidebar.ejs') %>
             <div class="thead fw-bold border-bottom border-1 border-light-200">
               <div class="row px-2">
                 <div class="col col-1 text-center">No</div>
-
-                <div class="col col-2">
-                  Nama Pengguna
-                  <span class="float-end"
-                    ><i class="bi bi-caret-up-fill text-gray-300"></i
-                  ></span>
-                </div>
-                <div class="col col-2">
-                  Nama Lab
-                  <span class="float-end"
-                    ><i class="bi bi-caret-up-fill text-gray-300"></i
-                  ></span>
-                </div>
-                <div class="col col-2">
-                  Tanggal Peminjaman
-                  <span class="float-end"
-                    ><i class="bi bi-caret-up-fill text-gray-300"></i
-                  ></span>
-                </div>
-                <div class="col col-2">
-                  Waktu Mulai
-                  <span class="float-end"
-                    ><i class="bi bi-caret-up-fill text-gray-300"></i
-                  ></span>
-                </div>
-                <div class="col col-2">
-                  Waktu Selesai
-                  <span class="float-end"
-                    ><i class="bi bi-caret-up-fill text-gray-300"></i
-                  ></span>
-                </div>
-                <div class="col col-2">
-                  Disetujui
-                  <span class="float-end"
-                    ><i class="bi bi-caret-up-fill text-gray-300"></i
-                  ></span>
-                </div>
-                <div class="col col-2">
-                  Alasan
-                  <span class="float-end"
-                    ><i class="bi bi-caret-up-fill text-gray-300"></i
-                  ></span>
-                </div>
+                <div class="col col-2">Nama Pengguna<span class="float-end"><i class="bi bi-caret-up-fill text-gray-300"></i></span></div>
+                <div class="col col-2">Nama Lab<span class="float-end"><i class="bi bi-caret-up-fill text-gray-300"></i></span></div>
+                <div class="col col-2">Tanggal Peminjaman<span class="float-end"><i class="bi bi-caret-up-fill text-gray-300"></i></span></div>
+                <div class="col col-2">Waktu Mulai<span class="float-end"><i class="bi bi-caret-up-fill text-gray-300"></i></span></div>
+                <div class="col col-2">Waktu Selesai<span class="float-end"><i class="bi bi-caret-up-fill text-gray-300"></i></span></div>
+                <div class="col col-2">Disetujui<span class="float-end"><i class="bi bi-caret-up-fill text-gray-300"></i></span></div>
+                <div class="col col-2">Alasan<span class="float-end"><i class="bi bi-caret-up-fill text-gray-300"></i></span></div>
                 <div class="col col-2 text-end">Action</div>
               </div>
             </div>
@@ -72,14 +33,12 @@ include('../../partials/sidebar.ejs') %>
             <div class="tbody">
               <% for(var i=0; i < data.length; i++) { %>
               <div class="row px-2 border-bottom border-1 border-light-200">
-                <div class="col col-1 text-center">1</div>
-
+                <div class="col col-1 text-center"><%= i + 1 %></div>
                 <div class="col col-2"><%= data[i].nama_pengguna %></div>
                 <div class="col col-2"><%= data[i].nama_lab %></div>
                 <div class="col col-2"><%= convert(data[i].tanggal_peminjaman) %></div>
                 <div class="col col-2"><%= data[i].waktu_mulai %></div>
                 <div class="col col-2"><%= data[i].waktu_selesai %></div>
-
                 <div class="col col-2">
                   <% if (data[i].disetujui == 'ya') { %>
                   <div class="btn btn-success text-white">Disetujui</div>
@@ -88,29 +47,20 @@ include('../../partials/sidebar.ejs') %>
                   <% } %>
                 </div>
                 <div class="col col-2"><%= data[i].alasan %></div>
-                
                 <div class="col col-2 d-flex text-center">
                   <form action="/peminjaman/disetujui/<%= data[i].id_peminjaman %>" method="post">
-                    <button type="submit" class="btn btn-info text-white">
-                      Setuju
-                    </button>
+                    <button type="submit" class="btn btn-info text-white">Setuju</button>
+                  </form>
+                  <form action="/peminjaman/tolak/<%= data[i].id_peminjaman %>" method="post">
+                    <button type="submit" class="btn btn-info text-white">Tolak</button>
                   </form>
                   |
-                  <a
-                    href="/peminjaman/edit/<%= data[i].id_peminjaman %>"
-                    >
-                    <button class="btn btn-warning">
-                      Edit
-                    </button>
-                    </a
-                  >
+                  <a href="/peminjaman/edit/<%= data[i].id_peminjaman %>">
+                    <button class="btn btn-warning">Edit</button>
+                  </a>
                   |
-                  <a
-                    href="/peminjaman/delete/<%= data[i].id_peminjaman %>"
-                  >
-                    <button class="btn btn-danger">
-                      Delete
-                    </button>
+                  <a href="/peminjaman/delete/<%= data[i].id_peminjaman %>">
+                    <button class="btn btn-danger">Delete</button>
                   </a>
                 </div>
               </div>
@@ -118,14 +68,8 @@ include('../../partials/sidebar.ejs') %>
             </div>
           </div>
 
-          <div
-            class="mt-5 d-flex justify-content-center justify-content-md-between align-items-center flex-wrap"
-          >
-            <p class="mb-0">
-              Showing <span class="fw-bold">1-10</span> from
-              <span class="fw-bold">46</span> data
-            </p>
-
+          <div class="mt-5 d-flex justify-content-center justify-content-md-between align-items-center flex-wrap">
+            <p class="mb-0">Showing <span class="fw-bold">1-10</span> from <span class="fw-bold">46</span> data</p>
             <nav>
               <ul class="pagination mb-0">
                 <li class="page-item">

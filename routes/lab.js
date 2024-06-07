@@ -4,6 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const multer = require("multer");
 const Model_lab = require("../Model/model_lab.js");
+const Model_user = require("../Model/model_pengguna.js");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -18,17 +19,25 @@ const upload = multer({ storage: storage });
 
 router.get("/", async function (req, res, next) {
   let rows = await Model_lab.getAll();
+  let user = await Model_user.getId(req.session.userId)
   res.render("admin/lab/index", {
     data: rows,
+    title: 'Express',
+    nama: user[0].nama_pengguna,
+    role: user[0].role
   });
 });
 
 router.get("/create", async function (req, res, next) {
   let rows = await Model_lab.getAll();
+  let user = await Model_user.getId(req.session.userId)
   res.render("admin/lab/create", {
     data: rows,
+    nama: user[0].nama_pengguna,
+    role: user[0].role
   });
 });
+
 router.post("/store", upload.single("gambar"), async function (req, res, next) {
   try {
     let { nama_lab, lokasi, tersedia } = req.body;
@@ -36,7 +45,9 @@ router.post("/store", upload.single("gambar"), async function (req, res, next) {
       nama_lab,
       lokasi,
       tersedia,
-      gambar: req.file ? req.file.filename : null, // Pastikan untuk menangani jika tidak ada file yang diunggah
+      gambar: req.file ? req.file.filename : null,
+      nama: user[0].nama_pengguna,
+      role: user[0].role
     };
 
     await Model_lab.Store(Data);
@@ -53,8 +64,11 @@ router.get("/edit/:id", async function (req, res, next) {
   try {
     let id = req.params.id;
     let rows = await Model_lab.getById(id);
+    let user = await Model_user.getId(req.session.userId)
     res.render("admin/lab/edit", {
-      data: rows[0], // Mengambil objek pertama dari array rows
+      data: rows[0], 
+      nama: user[0].nama_pengguna,
+      role: user[0].role
     });
   } catch (error) {
     res.redirect("/lab");

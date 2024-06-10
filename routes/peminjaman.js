@@ -72,11 +72,11 @@ router.post("/store", async function (req, res, next) {
     };
 
     let data = {
-      tersedia: 0
+      tersedia: '0'
     }
 
-    await Model_lab.Update(id_lab, data);
     await model_peminjaman.Store(Data);
+    await Model_lab.Update(id_lab, data);
     req.flash("success", "Berhasil menyimpan data");
     res.redirect("/peminjaman");
 });
@@ -134,15 +134,14 @@ router.post("/update/:id", async function (req, res, next) {
     };
     let peminjaman = await model_peminjaman.getById(id)
     let data = {
-      tersedia: 0
+      tersedia: '0'
     }
+    await model_peminjaman.Update(id, Data);
+    await Model_lab.Update(id_lab, data);
     await Model_lab.Update(peminjaman[0].id_lab, {
-      tersedia: 1
+      tersedia: '1'
     });
     
-
-    await Model_lab.Update(id_lab, data);
-    await model_peminjaman.Update(id, Data);
     req.flash("success", "Berhasil mengupdate data");
     res.redirect("/peminjaman");
   } catch (error) {

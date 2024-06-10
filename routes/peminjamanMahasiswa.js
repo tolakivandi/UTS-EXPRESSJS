@@ -72,10 +72,10 @@ router.get("/create", async function (req, res, next) {
       };
 
       let data = {
-        tersedia: 0
+        tersedia: '0'
       }
-      await Model_lab.Update(id_lab, data);
       await model_peminjaman.Store(Data);
+      await Model_lab.Update(id_lab, data);
       req.flash("success", "Berhasil menyimpan data");
       res.redirect("/mahasiswa/peminjaman");
     } catch (error) {

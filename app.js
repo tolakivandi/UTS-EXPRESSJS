@@ -15,7 +15,7 @@ const dashboardRouter = require("./routes/dashboard");
 const indexRouter = require("./routes/index");
 const SuperRouter = require("./routes/superusers");
 const MahasiswaRouter = require("./routes/mahasiswa");
-const MahasiswaLabRouter = require("./routes/peminjamanMahasiswa");
+const peminjamanMahasiswaRouter = require("./routes/peminjamanMahasiswa");
 
 var app = express();
 
@@ -53,7 +53,7 @@ app.use("/peminjaman", peminjammanRoter);
 app.use("/dashboard", dashboardRouter);
 app.use("/superusers",SuperRouter);
 app.use("/mahasiswa", MahasiswaRouter);
-app.use("/mahasiswa/lab", MahasiswaLabRouter);
+app.use("/mahasiswa/peminjaman", peminjamanMahasiswaRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

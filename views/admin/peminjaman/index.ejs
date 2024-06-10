@@ -44,6 +44,8 @@
                   <div class="btn btn-success text-white">Disetujui</div>
                   <% } else if (data[i].disetujui == 'tidak') { %>
                   <div class="btn btn-danger text-white">Tidak Disetujui</div>
+                  <% } else if(data[i].disetujui == 'tunggu') { %>
+                    <div class="btn btn-warning text-white">Tunggu Disetujui</div>
                   <% } %>
                 </div>
                 <div class="col col-2"><%= data[i].alasan %></div>

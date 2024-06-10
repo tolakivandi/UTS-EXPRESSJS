@@ -44,6 +44,22 @@ class Model_lab {
     });
   }
 
+  static async getByTersedia(tersedia) {
+    return new Promise((resolve, reject) => {
+      connection.query(
+        "SELECT * FROM lab WHERE tersedia = ?",
+        tersedia,
+        (err, rows) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(rows);
+          }
+        }
+      );
+    });
+  }
+
   static async Update(id, data) {
     return new Promise((resolve, reject) => {
       connection.query(

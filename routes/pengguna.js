@@ -39,7 +39,7 @@ router.post('/register', async function (req, res) {
   const { nama_pengguna, email, kata_sandi, role } = req.body;
   try {
     // Simpan pengguna baru ke dalam database
-    const newUser = await Model_pengguna.createUser({ nama_pengguna, email, kata_sandi, role });
+    await Model_pengguna.Store({ nama_pengguna, email, kata_sandi, role });
     // Jika berhasil, arahkan ke halaman login
     res.redirect('/login');
   } catch (error) {

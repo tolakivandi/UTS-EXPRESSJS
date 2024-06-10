@@ -41,7 +41,7 @@ router.get("/", async function (req, res, next) {
 router.get("/create", async function (req, res, next) {
   let rows = await model_peminjaman.getAll();
   let data_pengguna = await Model_pengguna.getAll();
-  let data_lab = await Model_lab.getAll();
+  let data_lab = await Model_lab.getByTersedia(1);
   let user = await Model_user.getId(req.session.userId)
   res.render("admin/peminjaman/create", {
     data: rows,
@@ -53,7 +53,6 @@ router.get("/create", async function (req, res, next) {
 });
 
 router.post("/store", async function (req, res, next) {
-  try {
     let id_pengguna = req.session.userId
     let {
       id_lab,
@@ -71,14 +70,15 @@ router.post("/store", async function (req, res, next) {
       disetujui: 'tunggu',
       alasan,
     };
+
+    let data = {
+      tersedia: 0
+    }
+
+    await Model_lab.Update(id_lab, data);
     await model_peminjaman.Store(Data);
     req.flash("success", "Berhasil menyimpan data");
     res.redirect("/peminjaman");
-  } catch (error) {
-    console.error(error);
-    req.flash("error", "Gagal menyimpan data");
-    res.redirect("/peminjaman");
-  }
 });
 
 router.get("/edit/:id", async function (req, res, next) {
@@ -132,6 +132,16 @@ router.post("/update/:id", async function (req, res, next) {
       disetujui,
       alasan,
     };
+    let peminjaman = await model_peminjaman.getById(id)
+    let data = {
+      tersedia: 0
+    }
+    await Model_lab.Update(peminjaman[0].id_lab, {
+      tersedia: 1
+    });
+    
+
+    await Model_lab.Update(id_lab, data);
     await model_peminjaman.Update(id, Data);
     req.flash("success", "Berhasil mengupdate data");
     res.redirect("/peminjaman");
@@ -176,9 +186,20 @@ router.post("/tolak/:id", async function (req, res, next) {
 
 router.get("/delete/(:id)", async function (req, res, next) {
   let id = req.params.id;
-  await model_peminjaman.Delete(id);
-  req.flash("success", "Berhasil menghapus data");
-  res.redirect("/peminjaman");
+  try {
+    let peminjaman = await model_peminjaman.getById(id)
+    let data = {
+      tersedia: 1
+    }
+    await Model_lab.Update(peminjaman[0].id_lab, data);
+    
+    await model_peminjaman.Delete(id);
+    req.flash("success", "Berhasil menghapus data");
+    res.redirect("/peminjaman");
+  } catch (error) {
+    req.flash("error", "Gagal menghapus data");
+    res.redirect("/peminjaman");
+  }
 });
 
 module.exports = router;

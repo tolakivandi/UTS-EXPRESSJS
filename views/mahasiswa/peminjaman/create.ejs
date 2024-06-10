@@ -1,0 +1,165 @@
+<%- include('../../partials/header') %> <%- include('../../partials/sidebar') %>
+
+<!-- Main Wrapper-->
+<main class="main-wrapper">
+  <div class="container-fluid">
+    <div class="inner-contents">
+      <div
+        class="page-header d-flex align-items-center justify-content-between mr-bottom-30"
+      >
+        <div class="left-part">
+          <h2 class="text-dark">Form Labolatorium</h2>
+        </div>
+        <div class="right-part">
+          <form
+            class="search-form w-auto"
+            action="https://wpthemebooster.com/demo/themeforest/html/kleon/search.php"
+          >
+            <input
+              type="text"
+              name="search"
+              class="bg-white form-control"
+              placeholder="Search"
+            />
+            <button type="submit" class="btn">
+              <img src="assets/img/svg/search.svg" alt="" />
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Form Wizard -->
+      <div class="card border-0 p-5">
+        <div class="card-header bg-transparent border-0 p-0">
+          <h6 class="mb-0">Basic Form Wizard</h6>
+        </div>
+
+        <div class="card-body p-0 pt-4">
+          <form method="post" action="/mahasiswa/peminjaman/store">
+            <!-- First Wizard -->
+            <div class="form-wizard-block active">
+              <div class="row">
+                
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="id_lab" class="form-label">Nama Lab</label>
+                    <select
+                      class="form-control"
+                      id="id_lab"
+                      name="id_lab"
+                      required
+                    >
+                      <option disabled value="">Choose...</option>
+                      <% for(var i=0; i < data_lab.length; i++){ %>
+                      <option value="<%= data_lab[i].id_lab %>">
+                        <%= data_lab[i].nama_lab %>
+                      </option>
+                      <% } %>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <span
+                        class="badge d-flex align-items-center text-dark rounded-0 rounded-start py-2 px-3 border border-light-200 fs-16"
+                        ><i class="bi bi-person"></i
+                      ></span>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="lokasi"
+                        id="lokasi"
+                        placeholder="Lokasi"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <span
+                        class="badge d-flex align-items-center text-dark rounded-0 rounded-start py-2 px-3 border border-light-200 fs-16"
+                        ><i class="bi bi-person"></i
+                      ></span>
+                      <input
+                        type="date"
+                        class="form-control"
+                        name="tanggal_peminjaman"
+                        id="tanggal_peminjaman"
+                        placeholder="tanggal_peminjaman"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <span
+                        class="badge d-flex align-items-center text-dark rounded-0 rounded-start py-2 px-3 border border-light-200 fs-16"
+                        ><i class="bi bi-person"></i
+                      ></span>
+                      <input
+                        type="time"
+                        class="form-control"
+                        name="waktu_mulai"
+                        id="waktu_mulai"
+                        placeholder="waktu mulai"
+                        
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <span
+                        class="badge d-flex align-items-center text-dark rounded-0 rounded-start py-2 px-3 border border-light-200 fs-16"
+                        ><i class="bi bi-person"></i
+                      ></span>
+                      <input
+                        type="time"
+                        class="form-control"
+                        name="waktu_selesai"
+                        id="waktu_selesai"
+                        placeholder="waktu selesai"
+                        
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <span
+                        class="badge d-flex align-items-center text-dark rounded-0 rounded-start py-2 px-3 border border-light-200 fs-16"
+                        ><i class="bi bi-person"></i
+                      ></span>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="alasan"
+                        id="alasan"
+                        placeholder="Alasan"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="form-group mb-0">
+                  <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include('../../partials/footer') %>
